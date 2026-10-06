@@ -8,24 +8,26 @@ public class Empleado {
 	public static float CalculoNominaBruta(TipoEmpleado tipo, float VentasMes, float horasExtra) {
 		float sueldo=0;
 		
-		//calculo de sueldo base
 		if(tipo==TipoEmpleado.Encargado) {
-			sueldo=2000;
-		}
-		
-		else if(tipo==TipoEmpleado.Vendedor) {
 			sueldo=2500;
 		}
 		
+		else if(tipo==TipoEmpleado.Vendedor) {
+			sueldo=2000;
+		}
+		
 		else return -1;
 		
+		if(VentasMes<0) {
+			return -1;
+		}
+		else if(VentasMes>=1500) {
+			sueldo+=200;
+		}
+		else if(VentasMes>=1000) {
+			sueldo+=100;
+		}
 		
-		//calculo de ventas del mes
-		if(VentasMes>=1500) sueldo+=200;
-		else if(VentasMes>=1000) sueldo+=100;
-		else return -1;
-		
-		//horas extra
 		if(horasExtra>=0)
 			sueldo= sueldo+30*horasExtra;
 		else return -1;
@@ -36,9 +38,7 @@ public class Empleado {
 	
 	public static float CalculoNominaNeta(float nominaBruta) {
 		float retencion=0f;
-		
-		//calculo de la retencion
-		
+				
 		if(nominaBruta>2500)
 			retencion=0.18f;
 		else if(nominaBruta>2100)
@@ -48,7 +48,4 @@ public class Empleado {
 		return nominaBruta*(1-retencion);
 	}
 	
-	}
-	
-	
-
+}
